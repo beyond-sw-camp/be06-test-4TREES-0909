@@ -1,4 +1,68 @@
 package bid.servlet;
 
-public class BidDeleteServlet {
+import bid.dao.BidDao;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import config.BaseResponse;
+import config.BaseResponseMessage;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.Map;
+
+@WebServlet("/bid/delete")
+public class BidDeleteServlet extends HttpServlet {
+    BidDao dao;
+    ObjectMapper mapper;
+
+    @Override
+    public void init() {
+        dao = new BidDao();
+        mapper = new ObjectMapper();
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        BufferedReader reader = req.getReader();
+        StringBuilder json = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            json.append(line);
+        }
+        // Map
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<String, Object> jsonMap = objectMapper.readValue(json.toString(), new TypeReference<Map<String, Object>>() {
+        });
+        System.out.println(jsonMap);
+        int idx = (int)jsonMap.get("bidIdx");
+
+
+        // ------------------- 회원 가입하는 Dao의 메소드 실행 -------------------
+        Boolean result = dao.delete(idx);
+        // ------------------- ------------------- -------------------
+
+
+        // ------------------- Dao의 처리 결과에 따른 응답 설정 부분 -------------------
+        String jsonResponse;
+        if (result) {
+            BaseResponse response = new BaseResponse(BaseResponseMessage.BID_DELETE_SUCCESS);
+            jsonResponse = mapper.writeValueAsString(response);
+        } else {
+            BaseResponse response = new BaseResponse(BaseResponseMessage.BID_DELETE_FAIL);
+            jsonResponse = mapper.writeValueAsString(response);
+        }
+
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+        resp.getWriter().write(jsonResponse);
+        // ------------------- ------------------- -------------------
+
+    }
 }
