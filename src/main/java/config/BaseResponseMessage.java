@@ -229,6 +229,18 @@ public enum BaseResponseMessage {
     private Integer code;
     private String message;
 
+    public Boolean getSuccess() {
+        return isSuccess;
+    }
+
+    public Integer getCode() {
+        return code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
     BaseResponseMessage(Boolean isSuccess, Integer code, String message) {
         this.isSuccess = isSuccess;
         this.code = code;
