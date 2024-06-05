@@ -136,17 +136,17 @@ public enum BaseResponseMessage {
     // 공구 등록 성공
     GROUPBUY_REGIST_SUCCESS(true, 4000, "공구 등록이 완료되었습니다."),
     // 공구 등록 실패
-    GROUPBUY_RREGIST_FAIL(false,4001,"공구 등록에 실패하였습니다."),
+    GROUPBUY_REGIST_FAIL(false,4001,"공구 등록에 실패하였습니다."),
     // 공구 카테고리,
-    GROUPBUY_RREGIST_FAIL_CATEGORY_EMPTY(false,4002,"공구 카테고리를 선택하지 않았습니다."),
+    GROUPBUY_REGIST_FAIL_CATEGORY_EMPTY(false,4002,"공구 카테고리를 선택하지 않았습니다."),
     // 공구 제목,
-    GROUPBUY_RREGIST_FAIL_TITLE_EMPTY(false,4003, "공구 제목을 입력하지 않았습니다."),
+    GROUPBUY_REGIST_FAIL_TITLE_EMPTY(false,4003, "공구 제목을 입력하지 않았습니다."),
     // 공구 수량,
-    GROUPBUY_RREGIST_FAIL_QUANTITY_EMPTY(false,4004,"공구 수량을 입력하지 않았습니다."),
+    GROUPBUY_REGIST_FAIL_QUANTITY_EMPTY(false,4004,"공구 수량을 입력하지 않았습니다."),
     // 공구 내용,
-    GROUPBUY_RREGIST_FAIL_CONTENT_EMPTY(false,4005,"공구 내용을 입력하지 않았습니다."),
+    GROUPBUY_REGIST_FAIL_CONTENT_EMPTY(false,4005,"공구 내용을 입력하지 않았습니다."),
     // 공구 기간,
-    GROUPBUY_RREGIST_FAIL_PERIOD_EMPTY(false,4006,"공구 기간을 입력하지 않았습니다."),
+    GROUPBUY_REGIST_FAIL_PERIOD_EMPTY(false,4006,"공구 기간을 입력하지 않았습니다."),
 
     // 공구 시작 4100,
     // 시작 성공
@@ -233,5 +233,17 @@ public enum BaseResponseMessage {
         this.isSuccess = isSuccess;
         this.code = code;
         this.message = message;
+    }
+
+    public Boolean getSuccess() {
+        return isSuccess;
+    }
+
+    public Integer getCode() {
+        return code;
+    }
+
+    public String getMessage() {
+        return message;
     }
 }
