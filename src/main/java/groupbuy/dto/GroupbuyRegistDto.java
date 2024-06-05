@@ -1,6 +1,6 @@
 package groupbuy.dto;
 
-public class GroupbuyDto {
+public class GroupbuyRegistDto {
     private Integer userIdx;
     private Integer categoryIdx;
     private String gpbyTitle;

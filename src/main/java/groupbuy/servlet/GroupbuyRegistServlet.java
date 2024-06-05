@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import config.BaseResponse;
 import config.BaseResponseMessage;
 import groupbuy.dao.GroupbuyDao;
-import groupbuy.dto.GroupbuyDto;
+import groupbuy.dto.GroupbuyRegistDto;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,11 +37,11 @@ public class GroupbuyRegistServlet extends HttpServlet {
         while ((requestBody = reader.readLine()) != null) {
             json.append(requestBody);
         }
-        GroupbuyDto groupbuyDto = mapper.readValue(json.toString(), GroupbuyDto.class);
-        Boolean validReq = checkValidReq(groupbuyDto);
+        GroupbuyRegistDto groupbuyRegistDto = mapper.readValue(json.toString(), GroupbuyRegistDto.class);
+        Boolean validReq = checkValidReq(groupbuyRegistDto);
         Integer resultPk = -1;
         if (validReq) {
-            resultPk = groupbuyDao.regist(groupbuyDto);
+            resultPk = groupbuyDao.regist(groupbuyRegistDto);
         }
         String jsonResponse;
 
@@ -61,10 +61,10 @@ public class GroupbuyRegistServlet extends HttpServlet {
         resp.getWriter().write(jsonResponse);
     }
 
-    private static Boolean checkValidReq(GroupbuyDto groupbuyDto) {
-        if ((groupbuyDto.getCategoryIdx() == null) ||
-                (groupbuyDto.getGpbyContent() == null) || (groupbuyDto.getGpbyTitle() == null) || (groupbuyDto.getGpbyQuantity() == null) ||
-                (groupbuyDto.getGpbyEnddate() == null)) {
+    private static Boolean checkValidReq(GroupbuyRegistDto groupbuyRegistDto) {
+        if ((groupbuyRegistDto.getCategoryIdx() == null) ||
+                (groupbuyRegistDto.getGpbyContent() == null) || (groupbuyRegistDto.getGpbyTitle() == null) || (groupbuyRegistDto.getGpbyQuantity() == null) ||
+                (groupbuyRegistDto.getGpbyEnddate() == null)) {
             return false;
         }
         return true;

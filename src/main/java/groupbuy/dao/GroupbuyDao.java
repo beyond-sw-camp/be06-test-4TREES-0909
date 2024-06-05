@@ -2,7 +2,7 @@ package groupbuy.dao;
 
 import com.zaxxer.hikari.HikariDataSource;
 import config.DataSourceConfig;
-import groupbuy.dto.GroupbuyDto;
+import groupbuy.dto.GroupbuyRegistDto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,7 +16,7 @@ public class GroupbuyDao {
         dataSourceConfig = DataSourceConfig.getInstance();
     }
 
-    public Integer regist(GroupbuyDto dto) {
+    public Integer regist(GroupbuyRegistDto dto) {
         Connection connection = null;
         PreparedStatement pstmt = null;
         Integer result = null;
