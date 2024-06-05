@@ -13,7 +13,6 @@ public class BaseResponse<T> {
         this.result = result;
     }
 
-
     public BaseResponse(BaseResponseMessage baseResponseMessage) {
         this.success = baseResponseMessage.getSuccess();
         this.code = baseResponseMessage.getCode();
